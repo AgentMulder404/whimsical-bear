@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" fill="none">
+
+  <!-- Distant atmosphere blobs -->
+  <ellipse cx="52"  cy="115" rx="65" ry="50" fill="#355E3B" opacity="0.08"/>
+  <ellipse cx="312" cy="98"  rx="75" ry="55" fill="#40826D" opacity="0.07"/>
+
+  <!-- Main canopy -->
+  <ellipse cx="178" cy="62"  rx="118" ry="82" fill="#355E3B" opacity="0.91"/>
+  <ellipse cx="155" cy="76"  rx="82"  ry="62" fill="#40826D" opacity="0.50"/>
+  <ellipse cx="202" cy="55"  rx="72"  ry="52" fill="#5F8575" opacity="0.27"/>
+  <!-- Lichen-yellow light catch -->
+  <ellipse cx="170" cy="46"  rx="28"  ry="18" fill="#C9CC3F" opacity="0.09"/>
+
+  <!-- Tree trunk -->
+  <path d="M 160 300 C 153 255 147 195 163 128 L 195 128 C 211 195 205 255 198 300 Z" fill="#6F4E37"/>
+  <!-- Bark texture lines -->
+  <path d="M 167 198 C 172 188 176 192 174 206" stroke="#7B3F00" stroke-width="1.5" fill="none" opacity="0.32"/>
+  <path d="M 178 236 C 183 225 187 230 185 244" stroke="#7B3F00" stroke-width="1.5" fill="none" opacity="0.32"/>
+
+  <!-- Left gnarled root — duck's hiding spot -->
+  <path d="M 160 284 C 138 282 106 278 84 288 C 71 294 69 305 81 308 C 94 311 122 300 143 292 C 155 287 160 284 160 284 Z" fill="#6F4E37"/>
+  <ellipse cx="78" cy="306" rx="17" ry="9" fill="#7B3F00" opacity="0.62"/>
+
+  <!-- Right root -->
+  <path d="M 198 284 C 218 283 244 280 261 290 C 271 296 271 306 261 308 C 249 310 225 300 206 292 C 198 288 198 284 198 284 Z" fill="#6F4E37"/>
+
+  <!--
+    DUCK EASTER EGG
+    The duck hides behind the thick left root. Its parchment-coloured body
+    is almost entirely concealed by the root path above it. Only the round
+    golden head and small ochre bill peek above the root line — the same
+    earth tones as the surrounding ground make it easy to scan past.
+  -->
+  <!-- Duck body — nearly hidden, parchment tone blends with ground -->
+  <ellipse cx="95"   cy="295"   rx="13"  ry="7"   fill="#E9DCC9" opacity="0.72"/>
+  <!-- Duck head — just cresting the root -->
+  <circle  cx="103"  cy="283"   r="9"             fill="#E5AA70" opacity="0.91"/>
+  <!-- Duck bill -->
+  <path    d="M 111 282 L 118 280 L 117 285 Z"    fill="#CC7722" opacity="0.88"/>
+  <!-- Duck eye -->
+  <circle  cx="108"  cy="281"   r="1.5"           fill="#6F4E37"/>
+  <!-- Eye catchlight -->
+  <circle  cx="108.8" cy="280.3" r="0.7"          fill="#FAF9F6" opacity="0.60"/>
+  <!-- Faint wing feather hint -->
+  <path d="M 86 292 C 91 289 96 291 100 294" stroke="#CC7722" stroke-width="1" fill="none" opacity="0.38"/>
+
+  <!-- Ground (very subtle, anchors the scene) -->
+  <path d="M 0 272 C 70 260 160 257 240 261 C 300 264 360 268 360 268 L 360 300 L 0 300 Z" fill="#40826D" opacity="0.12"/>
+
+  <!-- Bear body -->
+  <ellipse cx="178" cy="230" rx="50" ry="55" fill="#7B3F00"/>
+  <!-- Soft belly highlight -->
+  <ellipse cx="178" cy="242" rx="25" ry="28" fill="#E5AA70" opacity="0.17"/>
+  <!-- Left arm -->
+  <path d="M 134 218 C 128 228 126 248 132 263 C 136 271 148 273 155 268 C 162 263 160 248 157 236 C 154 226 144 214 134 218 Z" fill="#7B3F00"/>
+  <!-- Right arm -->
+  <path d="M 222 218 C 228 228 230 248 224 263 C 220 271 208 273 201 268 C 194 263 196 248 199 236 C 202 226 212 214 222 218 Z" fill="#7B3F00"/>
+  <!-- Paws -->
+  <ellipse cx="150" cy="268" rx="15" ry="10" fill="#6F4E37"/>
+  <ellipse cx="206" cy="268" rx="15" ry="10" fill="#6F4E37"/>
+  <!-- Acorn cradled between paws -->
+  <ellipse cx="178" cy="269" rx="9"   ry="7"   fill="#CC7722" opacity="0.83"/>
+  <ellipse cx="178" cy="263" rx="9"   ry="4.5" fill="#6F4E37" opacity="0.88"/>
+  <line x1="178" y1="259" x2="176" y2="252" stroke="#355E3B" stroke-width="1.5" stroke-linecap="round"/>
+  <ellipse cx="175" cy="250" rx="5" ry="3" fill="#355E3B" opacity="0.75" transform="rotate(-20 175 250)"/>
+
+  <!-- Bear head -->
+  <circle cx="178" cy="178" r="42" fill="#7B3F00"/>
+  <!-- Ears -->
+  <circle cx="147" cy="148" r="15" fill="#7B3F00"/>
+  <circle cx="147" cy="148" r="9"  fill="#954535" opacity="0.27"/>
+  <circle cx="209" cy="148" r="15" fill="#7B3F00"/>
+  <circle cx="209" cy="148" r="9"  fill="#954535" opacity="0.27"/>
+  <!-- Muzzle -->
+  <ellipse cx="178" cy="192" rx="19" ry="15" fill="#6F4E37" opacity="0.48"/>
+  <!-- Nose -->
+  <ellipse cx="178" cy="186" rx="7" ry="5.5" fill="#2e1600" opacity="0.78"/>
+  <!-- Smile -->
+  <path d="M 171 196 C 174 202 182 202 185 196" stroke="#2e1600" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.68"/>
+  <!-- Left eye + catchlight + eyelid -->
+  <ellipse cx="164" cy="174" rx="6.5" ry="5.5" fill="#2e1600" opacity="0.86"/>
+  <circle  cx="166" cy="172" r="2"              fill="#FAF9F6" opacity="0.44"/>
+  <path d="M 157 172 C 160 168 169 168 172 172" stroke="#7B3F00" stroke-width="1.8" fill="none" opacity="0.42"/>
+  <!-- Right eye + catchlight + eyelid -->
+  <ellipse cx="192" cy="174" rx="6.5" ry="5.5" fill="#2e1600" opacity="0.86"/>
+  <circle  cx="194" cy="172" r="2"              fill="#FAF9F6" opacity="0.44"/>
+  <path d="M 185 172 C 188 168 197 168 200 172" stroke="#7B3F00" stroke-width="1.8" fill="none" opacity="0.42"/>
+
+  <!-- Bear legs -->
+  <ellipse cx="160" cy="278" rx="22" ry="14" fill="#7B3F00"/>
+  <ellipse cx="196" cy="278" rx="22" ry="14" fill="#7B3F00"/>
+  <!-- Paw pads -->
+  <ellipse cx="160" cy="285" rx="14" ry="7" fill="#6F4E37"/>
+  <ellipse cx="196" cy="285" rx="14" ry="7" fill="#6F4E37"/>
+
+  <!-- Mushrooms (right side) -->
+  <rect    x="282" y="265" width="10" height="24" rx="4" fill="#E9DCC9"/>
+  <ellipse cx="287" cy="266" rx="21" ry="13"             fill="#954535"/>
+  <circle  cx="282" cy="263" r="3"                        fill="#FAF9F6" opacity="0.48"/>
+  <circle  cx="291" cy="261" r="2"                        fill="#FAF9F6" opacity="0.48"/>
+
+  <rect    x="308" y="274" width="7"  height="16" rx="3" fill="#E9DCC9"/>
+  <ellipse cx="311" cy="275" rx="14" ry="9"              fill="#CC7722" opacity="0.86"/>
+  <circle  cx="309" cy="273" r="2"                        fill="#FAF9F6" opacity="0.44"/>
+
+  <rect    x="268" y="280" width="5"  height="11" rx="2" fill="#E9DCC9" opacity="0.78"/>
+  <ellipse cx="270" cy="280" rx="9"  ry="7"              fill="#954535" opacity="0.58"/>
+
+  <!-- Grass tufts -->
+  <path d="M 28 278 C 26 264 30 260 33 268 M 34 278 C 34 263 38 258 40 267 M 41 278 C 39 265 45 261 46 270"
+    stroke="#40826D" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 336 272 C 334 259 338 255 341 263 M 342 272 C 342 257 346 252 348 261"
+    stroke="#355E3B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M 250 268 C 248 255 252 251 255 260 M 256 268 C 256 253 260 249 262 258"
+    stroke="#40826D" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+  <!-- Fallen leaves -->
+  <ellipse cx="54"  cy="272" rx="8"   ry="5"   fill="#C9CC3F" opacity="0.53" transform="rotate(-28 54 272)"/>
+  <ellipse cx="322" cy="267" rx="7"   ry="4"   fill="#CC7722" opacity="0.48" transform="rotate(18 322 267)"/>
+  <ellipse cx="236" cy="265" rx="6"   ry="3.5" fill="#C9CC3F" opacity="0.46" transform="rotate(-12 236 265)"/>
+  <ellipse cx="130" cy="266" rx="5.5" ry="3.5" fill="#954535" opacity="0.36" transform="rotate(25 130 266)"/>
+
+  <!-- Acorn on ground -->
+  <ellipse cx="242" cy="277" rx="5" ry="6" fill="#CC7722" opacity="0.63"/>
+  <ellipse cx="242" cy="272" rx="5" ry="3" fill="#6F4E37"  opacity="0.72"/>
+
+  <!-- Firefly motes (periwinkle + aqua — extremely subtle) -->
+  <circle cx="62"  cy="176" r="2"   fill="#8A9AFB" opacity="0.21"/>
+  <circle cx="62"  cy="176" r="4.5" fill="#8A9AFB" opacity="0.07"/>
+  <circle cx="306" cy="146" r="1.8" fill="#96DED1" opacity="0.19"/>
+  <circle cx="306" cy="146" r="4"   fill="#96DED1" opacity="0.06"/>
+  <circle cx="340" cy="196" r="1.5" fill="#8A9AFB" opacity="0.17"/>
+  <circle cx="38"  cy="216" r="1.8" fill="#96DED1" opacity="0.16"/>
+
+</svg>
