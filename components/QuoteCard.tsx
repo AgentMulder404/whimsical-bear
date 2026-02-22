@@ -45,7 +45,7 @@ export default function QuoteCard({ quote, date }: QuoteCardProps) {
       {/* Quote text */}
       <blockquote
         className="
-          font-serif italic
+          font-serif font-semibold italic
           text-xl sm:text-2xl
           text-deep-brown
           leading-[1.75] tracking-wide
@@ -70,7 +70,7 @@ export default function QuoteCard({ quote, date }: QuoteCardProps) {
 
       {/* Date label */}
       {date && (
-        <figcaption className="font-sans text-xs text-coffee/42 tracking-widest uppercase">
+        <figcaption className="font-sans text-xs text-coffee tracking-widest uppercase">
           {date}
         </figcaption>
       )}

@@ -7,7 +7,7 @@ import './globals.css'
 // Nunito: rounded, friendly sans — used for body text, labels, and UI
 const lora = Lora({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
   variable: '--font-lora',
   display: 'swap',
@@ -15,7 +15,7 @@ const lora = Lora({
 
 const nunito = Nunito({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-nunito',
   display: 'swap',
 })

@@ -71,13 +71,13 @@ export default function SignupForm() {
         <p className="font-serif text-deep-brown text-xl mb-3">
           A small bird is on its way.
         </p>
-        <p className="font-sans text-coffee/60 text-sm leading-relaxed max-w-xs mx-auto mb-6">
+        <p className="font-sans text-coffee text-sm leading-relaxed max-w-xs mx-auto mb-6">
           It has flown through the trees carrying your confirmation.
           Check your inbox and click the link to step into the clearing.
         </p>
 
         {/* Resend nudge */}
-        <p className="font-sans text-xs text-coffee/40">
+        <p className="font-sans text-xs text-coffee">
           {resent
             ? 'The bird has turned back — another message is on its way.'
             : <>
@@ -109,7 +109,7 @@ export default function SignupForm() {
       <div className="group flex flex-col gap-1.5">
         <label
           htmlFor="email"
-          className="flex items-center gap-1.5 font-sans text-xs text-coffee/55 group-focus-within:text-moss transition-colors duration-200"
+          className="flex items-center gap-1.5 font-sans text-xs text-coffee group-focus-within:text-moss transition-colors duration-200"
         >
           <SmallLeaf />
           Email address
@@ -138,7 +138,7 @@ export default function SignupForm() {
       <div className="group flex flex-col gap-1.5">
         <label
           htmlFor="phone"
-          className="flex items-center gap-1.5 font-sans text-xs text-coffee/55 group-focus-within:text-moss transition-colors duration-200"
+          className="flex items-center gap-1.5 font-sans text-xs text-coffee group-focus-within:text-moss transition-colors duration-200"
         >
           <SmallLeaf />
           Phone number
@@ -167,7 +167,7 @@ export default function SignupForm() {
       <div className="group flex flex-col gap-1.5">
         <label
           htmlFor="preferred-time"
-          className="flex items-center gap-1.5 font-sans text-xs text-coffee/55 group-focus-within:text-moss transition-colors duration-200"
+          className="flex items-center gap-1.5 font-sans text-xs text-coffee group-focus-within:text-moss transition-colors duration-200"
         >
           <SmallLeaf />
           When should your calm arrive?
@@ -224,7 +224,7 @@ export default function SignupForm() {
         {loading ? 'Finding your path\u2026' : 'Wake me gently each morning'}
       </button>
 
-      <p className="text-center font-sans text-xs text-coffee/35 mt-0.5">
+      <p className="text-center font-sans text-xs text-coffee mt-0.5">
         No noise. Just a quiet thought at dawn.
       </p>
     </form>

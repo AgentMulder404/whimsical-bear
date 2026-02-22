@@ -27,10 +27,10 @@ export default function Home() {
 
       {/* ── App header ───────────────────────────────────────────────────── */}
       <header className="fade-in text-center mb-2">
-        <h1 className="font-serif text-deep-brown text-xl sm:text-2xl tracking-wide">
+        <h1 className="font-serif font-bold text-deep-brown text-xl sm:text-2xl tracking-wide">
           Whimsical Bear
         </h1>
-        <p className="font-sans text-coffee/50 text-xs tracking-widest uppercase mt-1">
+        <p className="font-sans text-coffee text-xs tracking-widest uppercase mt-1">
           A daily moment of calm
         </p>
       </header>
@@ -56,7 +56,7 @@ export default function Home() {
       </section>
 
       {/* ── Supporting tagline ───────────────────────────────────────────── */}
-      <p className="fade-in-d3 font-sans text-sage text-sm mt-5 mb-7 text-center max-w-xs leading-relaxed">
+      <p className="fade-in-d3 font-sans text-forest text-sm mt-5 mb-7 text-center max-w-xs leading-relaxed">
         Each morning, a quiet thought from the woodland —{' '}
         <span className="text-moss">delivered to you.</span>
       </p>
@@ -74,7 +74,7 @@ export default function Home() {
 
       {/* ── Footer ───────────────────────────────────────────────────────── */}
       <footer className="mt-12 text-center">
-        <p className="font-sans text-xs text-coffee/28 tracking-wide">
+        <p className="font-sans text-xs text-coffee tracking-wide">
           &copy; {new Date().getFullYear()} Whimsical Bear
           &ensp;&middot;&ensp;
           Made with quiet care
