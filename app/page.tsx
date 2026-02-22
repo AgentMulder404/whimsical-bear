@@ -1,7 +1,8 @@
 import BackgroundDecor from '@/components/BackgroundDecor'
-import BearScene from '@/components/BearScene'
-import QuoteCard from '@/components/QuoteCard'
-import SignupForm from '@/components/SignupForm'
+import AnimatedBear    from '@/components/AnimatedBear'
+import BearScene       from '@/components/BearScene'
+import QuoteCard       from '@/components/QuoteCard'
+import SignupForm      from '@/components/SignupForm'
 
 // Future: replace with a server-side fetch from the Quote API.
 // import { getDailyQuote } from '@/lib/api'
@@ -22,8 +23,14 @@ export default function Home() {
   return (
     <main className="page-bg relative min-h-screen overflow-x-hidden flex flex-col items-center px-5 pt-12 pb-16">
 
-      {/* ── Background decoration — trees + duck, behind all content ─────── */}
+      {/* ── Background decoration — trees + duck, z-0 ───────────────────── */}
       <BackgroundDecor />
+
+      {/* ── Animated bear — right side, z-[8], behind UI but above texture ─
+           Plays sit → rise → turn sequence on mount, then breathes in a loop.
+           Swap /bear-portrait.png for a transparent WebM when a video is ready.
+      ────────────────────────────────────────────────────────────────────── */}
+      <AnimatedBear />
 
       {/* ── App header ───────────────────────────────────────────────────── */}
       <header className="fade-in text-center mb-2">
