@@ -1,6 +1,6 @@
 // ── SMS delivery via Twilio REST API ──────────────────────────────────────────
 // Uses the Twilio REST API directly — no SDK dependency.
-// Required env vars: TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM_NUMBER.
+// Required env vars: TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_MESSAGING_SERVICE_SID.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://whimsical-bear.vercel.app'
@@ -14,9 +14,9 @@ export interface SMSPayload {
 export async function sendSMS(payload: SMSPayload): Promise<void> {
   const { to, quote, date } = payload
 
-  const accountSid = process.env.TWILIO_ACCOUNT_SID!
-  const authToken  = process.env.TWILIO_AUTH_TOKEN!
-  const from       = process.env.TWILIO_FROM_NUMBER!
+  const accountSid          = process.env.TWILIO_ACCOUNT_SID!
+  const authToken           = process.env.TWILIO_AUTH_TOKEN!
+  const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID!
 
   const formattedDate = new Date(date + 'T00:00:00Z').toLocaleDateString('en-US', {
     weekday: 'short',
@@ -42,7 +42,7 @@ export async function sendSMS(payload: SMSPayload): Promise<void> {
         'Authorization': `Basic ${credentials}`,
         'Content-Type':  'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams({ Body: body, From: from, To: to }).toString(),
+      body: new URLSearchParams({ Body: body, MessagingServiceSid: messagingServiceSid, To: to }).toString(),
     },
   )
 
