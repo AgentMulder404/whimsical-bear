@@ -7,7 +7,7 @@ import SignupForm      from '@/components/SignupForm'
 // import { getDailyQuote } from '@/lib/api'
 // const { quote, date } = await getDailyQuote()
 const DAILY_QUOTE =
-  'Every small creature finds its shelter, and so, in time, will you.'
+  'The creek is unhurried this morning, and for now, so are you.'
 
 // Future: fetch today's AI-generated illustration URL and pass to BearScene.
 // const illustrationUrl = await getDailyImage()
