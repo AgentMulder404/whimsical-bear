@@ -62,7 +62,7 @@ export default function BackgroundMusic() {
     if (!initRef.current) {
       initRef.current = true
       if (!audio) {
-        audio        = new Audio('/audio/woodland-ambience.m4a')
+        audio        = new Audio('https://azanmaonnmcosrekipjo.supabase.co/storage/v1/object/public/assets/audio/woodland-ambience.m4a')
         audio.loop   = true
         audio.volume = 0
       }
