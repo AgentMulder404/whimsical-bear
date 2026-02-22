@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     // Users receive their daily quote by email — no login needed.
     password: crypto.randomUUID(),
     options: {
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
       data: { phone: phone || null, preferred_time: preferred_time || 'morning' },
     },
   })
