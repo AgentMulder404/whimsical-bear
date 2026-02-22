@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Lora, Nunito } from 'next/font/google'
+import BackgroundMusic from '@/components/BackgroundMusic'
 import './globals.css'
 
 // ─── Fonts ────────────────────────────────────────────────────────────────────
@@ -47,6 +48,10 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased">
         {children}
+        {/* Persists across all page navigations — fixed to bottom-right */}
+        <div className="fixed bottom-5 right-5 z-50">
+          <BackgroundMusic />
+        </div>
       </body>
     </html>
   )

@@ -21,3 +21,5 @@
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Audio files — too large for git, deploy via Vercel CLI
+public/audio/
