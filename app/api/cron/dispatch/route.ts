@@ -45,11 +45,11 @@
 //
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { NextResponse }   from 'next/server'
-import { createClient }   from '@supabase/supabase-js'
-import { generateMoment } from '@/lib/content'
-import { sendEmail }      from '@/lib/email'
-import { sendSMS }        from '@/lib/sms'
+import { NextResponse }              from 'next/server'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { generateMoment }           from '@/lib/content'
+import { sendEmail }                from '@/lib/email'
+import { sendSMS }                  from '@/lib/sms'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -206,10 +206,8 @@ export async function GET(request: Request) {
 
 // ── Content helper ─────────────────────────────────────────────────────────────
 
-async function getOrCreateMoment(
-  supabase: ReturnType<typeof createClient>,
-  date:     string,
-) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function getOrCreateMoment(supabase: SupabaseClient<any>, date: string) {
   // If today's moment already exists, reuse it — all delivery windows share it
   const { data: existing } = await supabase
     .from('daily_moments')
