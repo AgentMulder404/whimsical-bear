@@ -79,14 +79,17 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'The gate is locked.' }, { status: 401 })
   }
 
+  const url         = new URL(request.url)
+  const force       = url.searchParams.get('force') === 'true'
+
   const now         = new Date()
   const currentHour = now.getUTCHours()
-  const todaySlot   = HOUR_TO_SLOT[currentHour]
+  const todaySlot   = HOUR_TO_SLOT[currentHour] ?? 'morning'
   const todayKey    = DAY_KEYS[now.getUTCDay()]
   const todayDate   = now.toISOString().split('T')[0]   // "YYYY-MM-DD"
 
-  // Only proceed during a defined delivery window
-  if (!todaySlot) {
+  // Only proceed during a defined delivery window (bypass with ?force=true)
+  if (!HOUR_TO_SLOT[currentHour] && !force) {
     console.log(`[woodland:dispatch] The ${currentHour}:00 UTC hour holds no deliveries. The forest rests.`)
     return NextResponse.json({
       message: `Hour ${currentHour}:00 UTC is not a delivery window. The forest rests.`,
