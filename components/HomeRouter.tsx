@@ -15,15 +15,24 @@ export default function HomeRouter() {
   const [user,    setUser]    = useState<User | null | undefined>(undefined)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-    })
-
+    // onAuthStateChange fires an INITIAL_SESSION event on mount and correctly
+    // handles both existing localStorage sessions AND URL hash tokens from
+    // magic links — so we rely on it exclusively rather than calling getSession()
+    // first (which would set user=null and flash the landing page before the
+    // hash token is processed).
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
       setUser(session?.user ?? null)
     })
 
-    return () => subscription.unsubscribe()
+    // Safety fallback: if no auth event fires within 3s, show landing page
+    const fallback = setTimeout(() => {
+      setUser(prev => prev === undefined ? null : prev)
+    }, 3000)
+
+    return () => {
+      subscription.unsubscribe()
+      clearTimeout(fallback)
+    }
   }, [])
 
   // Still resolving — show nothing (avoids flash of wrong content)
