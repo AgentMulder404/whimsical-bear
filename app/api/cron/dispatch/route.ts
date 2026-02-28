@@ -1,10 +1,9 @@
 // ── Whimsical Bear — Daily Dispatch Cron ──────────────────────────────────────
 //
-// Runs every hour via Vercel Cron (see vercel.json).
-// At each "delivery window" hour it:
+// Runs once daily via Vercel Cron at 9 AM UTC (see vercel.json).
+// It:
 //   1. Gets or creates today's daily moment (quote + image)
-//   2. Finds every profile whose preferred_time matches NOW and whose
-//      days_of_week array contains today's day key
+//   2. Finds every profile whose days_of_week array contains today's day key
 //   3. Dispatches email and/or SMS per the user's delivery_method
 //   4. Logs each delivery to prevent duplicate sends (idempotency)
 //
@@ -51,22 +50,22 @@ import { generateMoment }           from '@/lib/content'
 import { sendEmail }                from '@/lib/email'
 import { sendSMS }                  from '@/lib/sms'
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://whimsical-bear.vercel.app'
+
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// ── Delivery window mapping ────────────────────────────────────────────────────
-// Keys must match the values stored in profiles.preferred_time.
-
-const HOUR_TO_SLOT: Record<number, string> = {
-  6:  'dawn',
-  9:  'morning',
-  12: 'midday',
-  15: 'afternoon',
-  18: 'dusk',
-}
-
 // Matches the day keys stored in profiles.days_of_week (0 = Sunday)
 const DAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const
+
+// Maps UTC hour → preferred_time slot (mirrors the UI labels)
+const HOUR_TO_SLOT: Record<number, string> = {
+  5:  'dawn',
+  8:  'morning',
+  12: 'midday',
+  15: 'afternoon',
+  19: 'evening',
+}
 
 // ── Handler ───────────────────────────────────────────────────────────────────
 
@@ -79,24 +78,18 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'The gate is locked.' }, { status: 401 })
   }
 
-  const url         = new URL(request.url)
-  const force       = url.searchParams.get('force') === 'true'
+  const now       = new Date()
+  const todayKey  = DAY_KEYS[now.getUTCDay()]
+  const todayDate = now.toISOString().split('T')[0]   // "YYYY-MM-DD"
+  const slot      = HOUR_TO_SLOT[now.getUTCHours()]
 
-  const now         = new Date()
-  const currentHour = now.getUTCHours()
-  const todaySlot   = HOUR_TO_SLOT[currentHour] ?? 'morning'
-  const todayKey    = DAY_KEYS[now.getUTCDay()]
-  const todayDate   = now.toISOString().split('T')[0]   // "YYYY-MM-DD"
-
-  // Only proceed during a defined delivery window (bypass with ?force=true)
-  if (!HOUR_TO_SLOT[currentHour] && !force) {
-    console.log(`[woodland:dispatch] The ${currentHour}:00 UTC hour holds no deliveries. The forest rests.`)
-    return NextResponse.json({
-      message: `Hour ${currentHour}:00 UTC is not a delivery window. The forest rests.`,
-    })
+  if (!slot) {
+    // Fired at an unexpected hour — nothing to do
+    console.warn(`[woodland:dispatch] No slot mapped for UTC hour ${now.getUTCHours()}. Standing down.`)
+    return NextResponse.json({ message: 'No slot for this hour.' })
   }
 
-  console.log(`[woodland:dispatch] The ${todaySlot} bell rings for ${todayKey}. Preparing the day's moment...`)
+  console.log(`[woodland:dispatch] The ${slot} bell rings for ${todayKey}. Preparing the day's moment...`)
 
   // Service-role client — bypasses RLS so we can read all profiles
   const supabase = createClient(
@@ -114,13 +107,13 @@ export async function GET(request: Request) {
   }
 
   // ── Step 2: Find eligible travelers ─────────────────────────────────────────
-  // Profiles whose preferred_time matches this delivery slot AND whose
-  // days_of_week array contains today's day key.
+  // Profiles whose days_of_week array contains today's day key.
   const { data: profiles, error: profilesError } = await supabase
     .from('profiles')
-    .select('id, email, phone, delivery_method')
-    .eq('preferred_time', todaySlot)
+    .select('id, email, phone, delivery_method, is_subscribed, unsubscribe_token')
     .contains('days_of_week', [todayKey])
+    .eq('preferred_time', slot)
+    .eq('is_subscribed', true)
 
   if (profilesError) {
     console.error('[woodland:dispatch] Could not read the woodland registry:', profilesError.message)
@@ -130,7 +123,7 @@ export async function GET(request: Request) {
     )
   }
 
-  console.log(`[woodland:dispatch] ${profiles.length} traveler(s) await their ${todaySlot} moment.`)
+  console.log(`[woodland:dispatch] ${profiles.length} traveler(s) await today's moment.`)
 
   // ── Step 3: Dispatch ─────────────────────────────────────────────────────────
   const tally = { sent: 0, skipped: 0, failed: 0 }
@@ -166,11 +159,15 @@ export async function GET(request: Request) {
       try {
         if (channel === 'email') {
           if (!profile.email) { tally.skipped++; continue }
+          const unsubscribeUrl = profile.unsubscribe_token
+            ? `${APP_URL}/api/unsubscribe?token=${profile.unsubscribe_token}`
+            : undefined
           await sendEmail({
-            to:       profile.email,
-            quote:    moment.quote,
-            imageUrl: moment.image_url,
-            date:     todayDate,
+            to:             profile.email,
+            quote:          moment.quote,
+            imageUrl:       moment.image_url,
+            date:           todayDate,
+            unsubscribeUrl,
           })
         } else {
           if (!profile.phone) { tally.skipped++; continue }
@@ -201,7 +198,7 @@ export async function GET(request: Request) {
     }
   }
 
-  const summary = `The ${todaySlot} dispatch is complete — sent: ${tally.sent}, skipped: ${tally.skipped}, failed: ${tally.failed}.`
+  const summary = `The daily dispatch is complete — sent: ${tally.sent}, skipped: ${tally.skipped}, failed: ${tally.failed}.`
   console.log(`[woodland:dispatch] ${summary}`)
 
   return NextResponse.json({ message: summary, ...tally })
