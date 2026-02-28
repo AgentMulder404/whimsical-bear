@@ -97,17 +97,53 @@ async function generateQuote(): Promise<string> {
   }
 }
 
-async function generateImage(): Promise<string | null> {
-  // TODO: replace with image generation API call (DALL-E 3, Replicate, etc.)
-  // The prompt to use:
-  //
-  //   "A high-resolution, macro-detail portrait of a rustic, homemaking brown
-  //    bear in a sun-drenched woodland clearing. Hyper-realistic fur. Peaceful,
-  //    sleepy expression. Easter Egg: tiny yellow duck nestled in neck fur.
-  //    Golden hour rim-lighting. Palette: #7B3F00, #6F4E37, #E5AA70.
-  //    Style: National Geographic + cozy storybook illustration."
+const IMAGE_PROMPT =
+  'A high-resolution, macro-detail portrait of a rustic, homemaking brown bear ' +
+  'in a sun-drenched woodland clearing. Hyper-realistic fur. Peaceful, sleepy expression. ' +
+  'Easter egg: tiny yellow duck nestled in neck fur. Golden hour rim-lighting. ' +
+  'Colour palette: warm browns #7B3F00 and #6F4E37, golden highlights #E5AA70. ' +
+  'Style: National Geographic photography meets cozy storybook illustration.'
 
-  return '/bear-portrait.png'
+async function generateImage(): Promise<string | null> {
+  const apiKey = process.env.OPENAI_API_KEY
+  if (!apiKey) {
+    console.warn('[woodland:content] OPENAI_API_KEY not set — using fallback image.')
+    return '/bear-portrait.png'
+  }
+
+  try {
+    const res = await fetch('https://api.openai.com/v1/images/generations', {
+      method:  'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type':  'application/json',
+      },
+      body: JSON.stringify({
+        model:   'dall-e-3',
+        prompt:  IMAGE_PROMPT,
+        n:       1,
+        size:    '1024x1024',
+        quality: 'standard',
+      }),
+    })
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}))
+      throw new Error(`OpenAI ${res.status}: ${JSON.stringify(err)}`)
+    }
+
+    const data = await res.json()
+    const url  = data.data?.[0]?.url as string | undefined
+
+    if (!url) throw new Error('No image URL in OpenAI response')
+
+    console.log('[woodland:content] Bear portrait generated.')
+    return url
+
+  } catch (err) {
+    console.error('[woodland:content] Image generation failed — using fallback:', err)
+    return '/bear-portrait.png'
+  }
 }
 
 function fallbackQuote(): string {
